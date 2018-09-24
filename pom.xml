@@ -13,16 +13,27 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
+        <!-- Remove related properties if removing default dependencies -->
         <junit.jupiter.version>5.3.1</junit.jupiter.version>
         <maven.surefire.version>2.22.0</maven.surefire.version>
         <selenide.version>4.14.2</selenide.version>
         <lombok.version>1.18.2</lombok.version>
         <webdrivermanager.version>3.0.0</webdrivermanager.version>
         <logback.version>1.2.3</logback.version>
-
+        <rest-assured.version>3.1.1</rest-assured.version>
+        <browsermob.version>2.1.5</browsermob.version>
+        <guava.version>23.0</guava.version>
     </properties>
 
     <dependencies>
+        <!-- Rest-assured is used for API testing and parsing JSON/XML -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+
+        <!-- Dependencies required for JUnit5, replace with JUnit4 or TestNG dependencies if needed -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -38,26 +49,54 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.jupiter.version}</version>
         </dependency>
+
+        <!-- Selenide is a selenium wrapper which provides extra features and reduces setup needed -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
+
+        <!-- Lombok is used to automatically generate Getters/Setters and to initialize Loggers.
+        Make sure that specific plugin is enabled in IDEA. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+
+        <!-- Manages WebDriver binaries and automatically downloads latest binary -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
         </dependency>
+
+        <!-- Logger wrapper for SLF4J.
+        Remove if using a different implementation e.g Log4J2 or similar.
+        configuration is located at main/resources/logback.xml -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
+        <!-- BrowserMob Proxy is used for capturing WebDriver HTTP traffic.
+        Remove if not needed.
+        Project source: https://github.com/lightbody/browsermob-proxy -->
+        <dependency>
+            <groupId>net.lightbody.bmp</groupId>
+            <artifactId>browsermob-core</artifactId>
+            <version>${browsermob.version}</version>
+        </dependency>
+
+        <!-- Guava version 23+ must be set or else proxy will throw errors -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
